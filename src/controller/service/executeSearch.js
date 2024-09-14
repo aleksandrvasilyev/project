@@ -23,9 +23,9 @@ export const executeSearch = async () => {
         );
       } else {
         renderError("Enter city name!");
+        throw new Error(error.message);
       }
     }
-
     resultInit(
       searchCity.value,
       startDate.value,

@@ -2,7 +2,6 @@ import { renderTemplate } from "./renderTemplate.js";
 
 export const renderIndex = () => {
   const indexContent = `
-      <!-- index start -->
     <main class="container">
         <div class="hero">
             <h1>Plan Your Travel Worldwide</h1>
@@ -28,7 +27,6 @@ export const renderIndex = () => {
             </form>
         </div>
     </main>
-    <!-- index end -->
 `;
   renderTemplate(indexContent);
 };

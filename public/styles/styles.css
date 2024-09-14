@@ -32,6 +32,7 @@ body {
     flex-wrap: wrap;
     gap: 50px;
     padding: 0px 10px;
+    margin-bottom: 60px;
 
 }
 
@@ -45,6 +46,7 @@ body {
     background-repeat: no-repeat;
     color: #fff;
     position: relative;
+
 }
 
 .container.results .result .content {
@@ -65,9 +67,27 @@ body {
     margin-bottom: 10px;
 }
 
+.container.results .result .type,
+.container.results .result .date,
+.container.results .result .location {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: rgb(230, 230, 230);
+}
+
+
+
 .container.results .result .description {
     color: #c1c1c1;
     font-size: 0.9rem;
+    display: none;
+
+}
+
+.container.results .result:hover .description {
+    display: block;
+
 }
 
 .container.results .result::before {

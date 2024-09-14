@@ -23,6 +23,7 @@ export const inputCityAutocomplete = () => {
 
     if (searchCity.value.trim().length === 0) {
       clearHints();
+      searchCity.removeAttribute("data-location");
       return;
     }
 
