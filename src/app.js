@@ -1,11 +1,7 @@
-import { renderIndex } from "./view/renderIndex.js";
-import { renderResult } from "./view/renderResult.js";
+import { indexInit } from "./controller/index.js";
 
 const main = () => {
-  renderIndex();
-  //   renderResult();
+  indexInit();
 };
 
-// window.addEventListener("load", main);
-
-
+window.addEventListener("load", main);

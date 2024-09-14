@@ -1,23 +1,25 @@
+import { APP_ID } from "../constants.js";
+
 export const renderTemplate = (content) => {
-  const app = document.getElementById("app");
+  const app = document.getElementById(APP_ID);
   app.innerHTML = `
- 
-    <header class="container">
-        <div class="menu">
+ <header>
+        <div class="container">
             <div class="logo">
-              <a href="#" class="logo__link">Travel advisor</a>
+                <a href="/">
+                    <img src="./public/images/logo.png" alt="logo">
+                </a>
             </div>
             <div class="nav">
-              <a href="#" class="nav__link">Home</a>
-              <a href="#" class="nav__link">About us</a>
+                <a href="#" class="active nav__link">Home</a><a href="#" class="nav__link">About us</a>
             </div>
         </div>
     </header>
- 
- 
-  <main class="container">${content}</main>
-  <footer class="container">
-      <p>Footer</p>
-  </footer>
+      ${content}
+     <footer>
+        <div class="container">
+            &copy; 2024 Travel advisor
+        </div>
+    </footer>
 `;
 };
