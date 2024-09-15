@@ -1,4 +1,4 @@
-import { indexInit } from "./controller/index.js";
+import { indexInit } from "./controller/indexPage.js";
 
 const main = () => {
   indexInit();

@@ -1,4 +1,4 @@
-import { HINTS_ELEMENT, HINT_ELEMENT } from "../../constants.js";
+import { DATA_LOCATION, HINTS_ELEMENT, HINT_ELEMENT } from "../../constants.js";
 
 export const renderHints = (data) => {
   const hints = document.getElementById(HINTS_ELEMENT);
@@ -9,7 +9,7 @@ export const renderHints = (data) => {
     hintElement.classList.add(HINT_ELEMENT);
     hintElement.textContent = element.geo.name;
     hintElement.setAttribute(
-      "data-location",
+      DATA_LOCATION,
       JSON.stringify(element.geo.center)
     );
     hints.appendChild(hintElement);
@@ -36,5 +36,5 @@ export const toggleHintsVisibility = (focusElement, toggleElement) => {
 
 export const setSearchValue = (element, value, location) => {
   element.value = value;
-  element.setAttribute("data-location", location);
+  element.setAttribute(DATA_LOCATION, location);
 };

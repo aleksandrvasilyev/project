@@ -97,14 +97,13 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.4);
     transition: background-color 0.4s;
     border-radius: 10px;
 }
 
 .container.results .result:hover::before {
-    background-color: rgba(0, 0, 0, 0.45);
-
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 .container.heading {
@@ -240,9 +239,7 @@ main {
     border-radius: 32px;
 }
 
-/* .search-form-small form input {
-    height: 40px;
-} */
+
 
 .search-form-small .form-group {
     margin-bottom: 0px;
@@ -251,12 +248,10 @@ main {
 }
 
 .hints {
-    /* display: none; */
     position: absolute;
     top: 84%;
     left: 0;
     background-color: #fff;
-    /* border: 1px solid #d1d5db; */
     max-height: 200px;
     overflow-y: auto;
     width: 100%;
@@ -322,6 +317,31 @@ footer .container {
     padding: 15px 20px;
     border-radius: 20px;
     color: #fff;
+}
+
+#history-results {
+    flex: 1;
+}
+
+#history-results .result {
+    display: block;
+    margin: 20px 10px;
+    padding: 10px 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+#history-results .result p {
+    padding-top: 20px;
+}
+
+#history-results .result a {
+    font-size: 1.4rem;
+    color: #163300;
+    text-decoration: none;
+}
+
+#history-results .result a:hover {
+    text-decoration: underline;
 }
 
 @media (max-width: 1200px) {

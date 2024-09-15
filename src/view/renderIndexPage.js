@@ -29,4 +29,5 @@ export const renderIndex = () => {
     </main>
 `;
   renderTemplate(indexContent);
+  document.getElementById("home-link").classList.add("active");
 };

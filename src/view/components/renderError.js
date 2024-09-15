@@ -6,5 +6,4 @@ export const renderError = (message) => {
   setTimeout(() => {
     if (errorBlock) errorBlock.remove();
   }, 3000);
-  // throw new Error(error.message);
 };

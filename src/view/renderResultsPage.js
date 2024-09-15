@@ -1,6 +1,7 @@
+import { renderError } from "./components/renderError.js";
 import { renderTemplate } from "./renderTemplate.js";
 
-export const renderResult = async (city, startDate, endDate) => {
+export const renderResultPage = async (city, startDate, endDate) => {
   const resultContent = `
     <main class="container result-search">
 
@@ -36,13 +37,8 @@ export const renderResult = async (city, startDate, endDate) => {
   renderTemplate(resultContent);
 };
 
-export const renderElement = async (
-  name,
-  description = "",
-  image,
-  container
-) => {
-  const results = document.getElementById(container);
+export const renderPlace = async (name, description = "", image) => {
+  const results = document.getElementById("places");
   const place = document.createElement("div");
   place.classList.add("result");
   place.style.backgroundImage = `url('${image}')`;
@@ -57,15 +53,8 @@ export const renderElement = async (
   results.appendChild(place);
 };
 
-export const renderEvent = async (
-  name,
-  type,
-  startDate,
-  location,
-  image,
-  container
-) => {
-  const results = document.getElementById(container);
+export const renderEvent = async (name, type, startDate, location, image) => {
+  const results = document.getElementById("events");
   const place = document.createElement("div");
   place.classList.add("result");
   place.style.backgroundImage = `url('${image}')`;
@@ -80,4 +69,21 @@ export const renderEvent = async (
         `;
 
   results.appendChild(place);
+};
+
+export const renderPlaces = async (value) => {
+  try {
+    const places = await value;
+    places.map((place) => renderPlace(place[0], place[1], place[2]));
+  } catch (error) {
+    renderError(error);
+    throw error;
+  }
+};
+
+export const renderEvents = async (value) => {
+  const events = await value;
+  events.forEach((event) => {
+    renderEvent(event[0], event[1], event[2], event[3], event[4]);
+  });
 };

@@ -6,12 +6,12 @@ export const renderTemplate = (content) => {
  <header>
         <div class="container">
             <div class="logo">
-                <a href="/">
+                <a href="#" class="home-link">
                     <img src="./public/images/logo.png" alt="logo">
                 </a>
             </div>
             <div class="nav">
-                <a href="#" class="active nav__link">Home</a><a href="#" class="nav__link">About us</a>
+                <a href="#" id="home-link" class="nav__link home-link">Home</a><a href="#" id="history-link" class="nav__link">History</a>
             </div>
         </div>
     </header>
