@@ -82,8 +82,26 @@ export const renderPlaces = async (value) => {
 };
 
 export const renderEvents = async (value) => {
-  const events = await value;
-  events.forEach((event) => {
-    renderEvent(event[0], event[1], event[2], event[3], event[4]);
-  });
+  try {
+    const events = await value;
+    events.forEach((event) => {
+      renderEvent(event[0], event[1], event[2], event[3], event[4]);
+    });
+  } catch (error) {
+    renderError(error);
+    throw error;
+  }
+};
+
+export const renderLoading = (container, action) => {
+  if (action === "show") {
+    const loadingElement = document.createElement("div");
+    loadingElement.id = `${container}-loading`;
+    const containerElement = document.getElementById(container);
+    containerElement.appendChild(loadingElement);
+    loadingElement.innerHTML = `<img src="././public/images/loading.gif" alt="loading">`;
+  } else if (action === "hide") {
+    const loadingElement = document.getElementById(`${container}-loading`);
+    loadingElement.remove();
+  }
 };

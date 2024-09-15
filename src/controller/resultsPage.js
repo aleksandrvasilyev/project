@@ -5,6 +5,7 @@ import {
   renderResultPage,
   renderPlaces,
   renderEvents,
+  renderLoading,
 } from "../view/renderResultsPage.js";
 import { executeSearch } from "./service/executeSearch.js";
 import { getEvents } from "./service/getEvents.js";
@@ -24,11 +25,19 @@ export const resultsInit = async (city, startDate, endDate, location) => {
       location
     );
 
-    const places = getPlaces(location);
-    await renderPlaces(places);
+    const placePromises = getPlaces(location);
+    const eventsPromises = getEvents(latitude, longitude, startDate, endDate);
 
-    const events = getEvents(latitude, longitude, startDate, endDate);
+    renderLoading("places", "show");
+    renderLoading("events", "show");
+
+    const [places, events] = await Promise.all([placePromises, eventsPromises]);
+
+    await renderPlaces(places);
+    renderLoading("places", "hide");
+
     await renderEvents(events);
+    renderLoading("events", "hide");
 
     inputCityAutocomplete();
     executeSearch();

@@ -41,8 +41,7 @@ export const getPlaces = async (location) => {
         throw error;
       }
     });
-    const results = Promise.all(placePromises);
-    return results;
+    return Promise.all(placePromises);
   } catch (error) {
     renderError("Error in getPlaces: ", error);
     throw error;

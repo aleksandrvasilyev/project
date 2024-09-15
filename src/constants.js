@@ -7,7 +7,7 @@ export const API_SEARCH_URL =
 export const API_PLACE_URL =
   "https://api.foursquare.com/v3/places/place_id?fields=venue_reality_bucket,fsq_id,categories,location,name,description,hours,hours_popular,rating,stats,price,photos";
 export const API_EVENTS_URL =
-  "https://www.jambase.com/jb-api/v1/events?geoLatitude=latitude_value&geoLongitude=longitude_value&eventDateFrom=start_date&eventDateTo=end_date&eventDataSource=ticketmaster&apikey=api_key_value&perPage=9";
+  "https://www.jambase.com/jb-api/v1/events?geoLatitude=latitude_value&geoLongitude=longitude_value&eventDateFrom=start_date&eventDateTo=end_date&eventDataSource=ticketmaster&apikey=api_key_value&perPage=8";
 export const HINTS_ELEMENT = "city-hints";
 export const HINT_ELEMENT = "hint-item";
 export const START_DATE = "trip-start";
