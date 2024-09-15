@@ -34,15 +34,19 @@ export const executeSearch = async () => {
         throw new Error(error.message);
       }
     }
+    if (endDate.value >= startDate.value) {
+      const params = [
+        searchCity.value,
+        startDate.value,
+        endDate.value,
+        searchCity.getAttribute(DATA_LOCATION),
+      ];
 
-    const params = [
-      searchCity.value,
-      startDate.value,
-      endDate.value,
-      searchCity.getAttribute(DATA_LOCATION),
-    ];
-
-    resultsInit(...params);
-    saveSearch(...params);
+      resultsInit(...params);
+      saveSearch(...params);
+    } else {
+      renderError("End Date must be bigger than Start Date");
+      return;
+    }
   };
 };
