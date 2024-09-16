@@ -102,7 +102,10 @@ body {
 }
 
 .container.heading {
+    display: flex;
+    justify-content: space-between;
     position: relative;
+    align-items: center;
     /* font-size: 1.3rem; */
     margin-bottom: 30px;
     padding: 0px 10px
@@ -119,7 +122,8 @@ header {
 }
 
 .nav a,
-.button {
+.button,
+.show-more {
     color: #163300;
     font-size: 15px;
     font-weight: 500;
@@ -129,15 +133,20 @@ header {
     text-decoration: none;
     margin-right: 15px;
     transition: background 0.3s;
+    cursor: pointer;
 }
 
+
+
 .nav a.active,
-.button {
+.button,
+.show-more {
     background: #9fe870;
 }
 
 .nav a.active:hover,
-.button:hover {
+.button:hover,
+.show-more:hover {
     background: #80E043;
 }
 
@@ -147,7 +156,8 @@ header {
 
 .nav a:active,
 .nav a.active:active,
-.button:active {
+.button:active,
+.show-more:active {
     background: #65cf21;
 }
 
@@ -297,7 +307,7 @@ footer .container {
 }
 
 #error {
-    position: absolute;
+    position: fixed;
     bottom: 10px;
     right: 10px;
     background: #a8200d;

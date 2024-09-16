@@ -24,19 +24,23 @@ export const resultsInit = async (city, startDate, endDate, location) => {
       city,
       location
     );
-
     const placePromises = getPlaces(location);
-    const eventsPromises = getEvents(latitude, longitude, startDate, endDate);
+
+    const { events: eventsPromises, totalItems } = await getEvents(
+      latitude,
+      longitude,
+      startDate,
+      endDate
+    );
 
     renderLoading("places", "show");
     renderLoading("events", "show");
-
     const [places, events] = await Promise.all([placePromises, eventsPromises]);
-   
+
     await renderPlaces(places);
     renderLoading("places", "hide");
 
-    await renderEvents(events);
+    await renderEvents(events, totalItems);
     renderLoading("events", "hide");
 
     inputCityAutocomplete();

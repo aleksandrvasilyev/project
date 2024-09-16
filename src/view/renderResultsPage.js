@@ -1,6 +1,7 @@
+import { getEvents } from "../controller/service/getEvents.js";
 import { renderError } from "./components/renderError.js";
 import { renderTemplate } from "./renderTemplate.js";
-
+let values = {};
 export const renderResultPage = async (city, startDate, endDate) => {
   const resultContent = `
     <main class="container result-search">
@@ -25,12 +26,14 @@ export const renderResultPage = async (city, startDate, endDate) => {
         </div>
     </main>
     <div class="container heading">
-        <h1>The most popular sights in ${city}</h1>
+        <h1>Popular places in ${city}</h1>
+        <div><span id="places-pcs">0</span> of <span id="places-max"></span> pcs.</div>
     </div>
     <div class="container results" id="places"></div>
 
     <div class="container heading">
-        <h1>Popular events in ${city} from ${startDate} to ${endDate}</h1>
+        <div><h1>Popular events in ${city}</h1><h3>${startDate} to ${endDate}</h3></div>
+        <div><span id="events-pcs">0</span> of <span id="events-max"></span> pcs.</div>
     </div>
     <div class="container results" id="events"></div>
 `;
@@ -73,20 +76,53 @@ export const renderEvent = async (name, type, startDate, location, image) => {
 
 export const renderPlaces = async (value) => {
   try {
+    values.places = value;
+    const countShowElements = 12;
+    const elementsPresent = document.querySelectorAll("#places .result").length;
+
+    const placesNumber = document.getElementById("places-pcs");
+
+    placesNumber.textContent = elementsPresent + countShowElements;
+
+    const placesMax = document.getElementById("places-max");
+    placesMax.textContent = 48;
+
     const places = await value;
-    places.map((place) => renderPlace(place[0], place[1], place[2]));
+
+    await places
+      .slice(elementsPresent, countShowElements + elementsPresent)
+      .map((place) => renderPlace(...place));
+
+    renderShowMorePlaces();
   } catch (error) {
     renderError(error);
     throw error;
   }
 };
 
-export const renderEvents = async (value) => {
+export const renderEvents = async (value, eventsMax = 0) => {
   try {
-    const events = await value;
+    const countShowElements = value.length;
+    const eventsElement = document.getElementById("events");
+    if (countShowElements === 0) {
+      const emptyResponse = document.createElement("div");
+      emptyResponse.textContent = `Nothing was found!`;
+      eventsElement.appendChild(emptyResponse);
+    }
+    const elementsPresent = document.querySelectorAll("#events .result").length;
+
+    const eventsNumber = document.getElementById("events-pcs");
+    eventsNumber.textContent = elementsPresent + countShowElements;
+
+    const eventsMaxElement = document.getElementById("events-max");
+    eventsMaxElement.textContent = eventsMax;
+
+    const events = value;
+
     events.forEach((event) => {
-      renderEvent(event[0], event[1], event[2], event[3], event[4]);
+      renderEvent(...event);
     });
+    renderShowMoreEvents();
   } catch (error) {
     renderError(error);
     throw error;
@@ -103,5 +139,58 @@ export const renderLoading = (container, action) => {
   } else if (action === "hide") {
     const loadingElement = document.getElementById(`${container}-loading`);
     loadingElement.remove();
+  }
+};
+
+const renderShowMorePlaces = () => {
+  const results = document.getElementById("places");
+  const button = document.createElement("div");
+  const elementsPresent = document.querySelectorAll(`#places .result`).length;
+
+  if (elementsPresent < 48) {
+    results.appendChild(button);
+    button.innerHTML = `<div class="show-more">Show more</div>`;
+    button.onclick = async () => {
+      renderLoading("places", "show");
+      button.remove();
+      await renderPlaces(values.places);
+      renderLoading("places", "hide");
+    };
+  }
+};
+
+const renderShowMoreEvents = () => {
+  const results = document.getElementById("events");
+  const button = document.createElement("div");
+  const elementsPresent = document.querySelectorAll(`#events .result`).length;
+  const maxEvents = document.getElementById("events-max").textContent;
+
+  if (elementsPresent < maxEvents) {
+    results.appendChild(button);
+    button.innerHTML = `<div class="show-more">Show more</div>`;
+    button.onclick = async () => {
+      renderLoading("events", "show");
+      button.remove();
+
+      const location = JSON.parse(
+        document.getElementById("trip-city").getAttribute("data-location")
+      );
+
+      const latitude = location.latitude;
+      const longitude = location.longitude;
+      const startDate = document.getElementById("trip-start").value;
+      const endDate = document.getElementById("trip-end").value;
+
+      const { events, totalItems } = await getEvents(
+        latitude,
+        longitude,
+        startDate,
+        endDate,
+        elementsPresent / 8 + 1
+      );
+
+      await renderEvents(events, totalItems);
+      renderLoading("events", "hide");
+    };
   }
 };
