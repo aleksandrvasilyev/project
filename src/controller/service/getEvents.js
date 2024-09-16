@@ -12,6 +12,7 @@ export const getEvents = async (latitude, longitude, startDate, endDate) => {
         .replace("end_date", endDate)
         .replace("api_key_value", API_KEY_JAM_BASE)
     );
+    console.log(data);
     const events = data.events.map((el) => {
       return [el.name, el["@type"], el.startDate, el.location.name, el.image];
     });

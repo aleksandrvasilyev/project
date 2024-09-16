@@ -14,6 +14,7 @@ export const getPlaces = async (location) => {
   const coordinates = `${latitude},${longitude}`;
   try {
     const data = await fetchData(`${API_SEARCH_URL}${coordinates}`, headers);
+    console.log(data);
     const ids = data.results.map((value) => value.fsq_id);
 
     const placePromises = ids.map(async (id) => {

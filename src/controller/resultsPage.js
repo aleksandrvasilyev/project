@@ -32,7 +32,7 @@ export const resultsInit = async (city, startDate, endDate, location) => {
     renderLoading("events", "show");
 
     const [places, events] = await Promise.all([placePromises, eventsPromises]);
-
+   
     await renderPlaces(places);
     renderLoading("places", "hide");
 
