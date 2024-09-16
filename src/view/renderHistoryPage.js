@@ -29,7 +29,7 @@ export const renderHistoryResults = () => {
       resultElement.appendChild(link);
       resultElement.appendChild(p);
       resultElement.classList.add("result");
-      link.innerHTML = `${resultObj.city}`;
+      link.innerHTML = `${resultObj.city} - ${resultObj.categoryValue}`;
       p.innerHTML = `${resultObj.startDate} - ${resultObj.endDate}`;
       historyResults.appendChild(resultElement);
 
@@ -38,7 +38,8 @@ export const renderHistoryResults = () => {
           resultObj.city,
           resultObj.startDate,
           resultObj.endDate,
-          resultObj.location
+          resultObj.location,
+          resultObj.category
         );
       };
     });

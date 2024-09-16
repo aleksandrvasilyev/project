@@ -8,5 +8,4 @@ export const searchHistoryInit = async () => {
   renderSearchHistory();
   renderHistoryResults();
   navigation();
-
 };

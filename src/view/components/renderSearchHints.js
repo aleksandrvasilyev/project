@@ -8,10 +8,7 @@ export const renderHints = (data) => {
     const hintElement = document.createElement("div");
     hintElement.classList.add(HINT_ELEMENT);
     hintElement.textContent = element.geo.name;
-    hintElement.setAttribute(
-      DATA_LOCATION,
-      JSON.stringify(element.geo.center)
-    );
+    hintElement.setAttribute(DATA_LOCATION, JSON.stringify(element.geo.center));
     hints.appendChild(hintElement);
   });
 };
@@ -32,7 +29,6 @@ export const toggleHintsVisibility = (focusElement, toggleElement) => {
     }, 100);
   };
 };
-
 
 export const setSearchValue = (element, value, location) => {
   element.value = value;

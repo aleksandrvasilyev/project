@@ -21,6 +21,17 @@ export const renderResultPage = async (city, startDate, endDate) => {
                     <h2><label for="trip-end">End Date</label></h2>
                     <input type="date" id="trip-end" value="${endDate}" min="2024-09-20" max="2024-12-31">
                 </div>
+              <div class="form-group">
+                    <h2><label for="category">Category</label></h2>
+                   <select id="category" class="select-category">
+                    <option value="16000">Landmarks and Outdoors</option>
+                    <option value="10000">Arts and Entertainment</option>
+                    <option value="13000">Dining and Drinking</option>
+                    <option value="18000">Sports and Recreation</option>
+                    <option value="19000">Travel and Transportation</option>
+                    <option value="15000">Health and Medicine</option>
+                   </select>
+                </div>
                 <button type="submit" class="button" id="search-button">Search</button>
             </form>
         </div>
@@ -193,4 +204,8 @@ const renderShowMoreEvents = () => {
       renderLoading("events", "hide");
     };
   }
+};
+
+export const setCategoryValue = (category) => {
+  document.getElementById("category").value = category;
 };

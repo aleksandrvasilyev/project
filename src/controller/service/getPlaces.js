@@ -3,7 +3,7 @@ import { API_PLACE_URL, API_SEARCH_URL } from "../../constants.js";
 import { renderError } from "../../view/components/renderError.js";
 import { fetchData } from "./fetchData.js";
 
-export const getPlaces = async (location) => {
+export const getPlaces = async (location, category) => {
   const headers = {
     headers: {
       Authorization: API_KEY_FOURSQUARE,
@@ -13,7 +13,10 @@ export const getPlaces = async (location) => {
   const { latitude, longitude } = JSON.parse(location);
   const coordinates = `${latitude},${longitude}`;
   try {
-    const data = await fetchData(`${API_SEARCH_URL}${coordinates}`, headers);
+    const data = await fetchData(
+      `${API_SEARCH_URL}${coordinates}`.replace("select_category", category),
+      headers
+    );
     const ids = data.results.map((value) => value.fsq_id);
 
     const placePromises = ids.map(async (id) => {

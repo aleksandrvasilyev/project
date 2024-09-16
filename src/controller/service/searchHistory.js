@@ -1,6 +1,13 @@
 import { renderError } from "../../view/components/renderError.js";
 
-export const saveSearch = (city, startDate, endDate, location) => {
+export const saveSearch = (
+  city,
+  startDate,
+  endDate,
+  location,
+  category,
+  categoryValue
+) => {
   try {
     const searchHistory =
       JSON.parse(sessionStorage.getItem("searchHistory")) || [];
@@ -10,6 +17,8 @@ export const saveSearch = (city, startDate, endDate, location) => {
       startDate,
       endDate,
       location,
+      category,
+      categoryValue,
     });
 
     const isDuplicate = searchHistory.some((value) => {
