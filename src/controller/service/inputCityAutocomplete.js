@@ -1,6 +1,6 @@
 import { API_KEY_FOURSQUARE } from "../../../api-keys.js";
 import {
-  API_AUTOCOMPLETE_URL,
+  API_AUTOCOMPLETE_CITY_URL,
   HINTS_ELEMENT,
   SEARCH_CITY_ELEMENT,
 } from "../../constants.js";
@@ -30,7 +30,7 @@ export const inputCityAutocomplete = () => {
     searchTimeout = setTimeout(async () => {
       try {
         const data = await fetchData(
-          `${API_AUTOCOMPLETE_URL}${searchCity.value}`,
+          `${API_AUTOCOMPLETE_CITY_URL}${searchCity.value}`,
           {
             headers: {
               Authorization: API_KEY_FOURSQUARE,

@@ -1,3 +1,4 @@
+import { SELECT_CATEGORY } from "../constants.js";
 import { getEvents } from "../controller/service/getEvents.js";
 import { renderError } from "./components/renderError.js";
 import { renderTemplate } from "./renderTemplate.js";
@@ -37,14 +38,14 @@ export const renderResultPage = async (city, startDate, endDate) => {
         </div>
     </main>
     <div class="container heading">
-        <h1>Popular places in ${city}</h1>
-        <div><span id="places-pcs">0</span> of <span id="places-max"></span> pcs.</div>
+        <h1>Popular <span id="category-value"></span> places in ${city}</h1>
+        <div id="places-pcs"></div>
     </div>
     <div class="container results" id="places"></div>
 
     <div class="container heading">
         <div><h1>Popular events in ${city}</h1><h3>${startDate} to ${endDate}</h3></div>
-        <div><span id="events-pcs">0</span> of <span id="events-max"></span> pcs.</div>
+        <div id="events-pcs"></div>
     </div>
     <div class="container results" id="events"></div>
 `;
@@ -89,14 +90,13 @@ export const renderPlaces = async (value) => {
   try {
     values.places = value;
     const countShowElements = 12;
-    const elementsPresent = document.querySelectorAll("#places .result").length;
 
+    const elementsPresent = document.querySelectorAll("#places .result").length;
     const placesNumber = document.getElementById("places-pcs");
 
-    placesNumber.textContent = elementsPresent + countShowElements;
-
-    const placesMax = document.getElementById("places-max");
-    placesMax.textContent = 48;
+    placesNumber.innerHTML = `<span>${
+      elementsPresent + countShowElements
+    }</span> of <span id="places-max">48</span> pcs.`;
 
     const places = await value;
 
@@ -115,6 +115,7 @@ export const renderEvents = async (value, eventsMax = 0) => {
   try {
     const countShowElements = value.length;
     const eventsElement = document.getElementById("events");
+
     if (countShowElements === 0) {
       const emptyResponse = document.createElement("div");
       emptyResponse.textContent = `Nothing was found!`;
@@ -123,10 +124,9 @@ export const renderEvents = async (value, eventsMax = 0) => {
     const elementsPresent = document.querySelectorAll("#events .result").length;
 
     const eventsNumber = document.getElementById("events-pcs");
-    eventsNumber.textContent = elementsPresent + countShowElements;
-
-    const eventsMaxElement = document.getElementById("events-max");
-    eventsMaxElement.textContent = eventsMax;
+    eventsNumber.innerHTML = `<div>${
+      elementsPresent + countShowElements
+    } of <span id="events-max">${eventsMax}</span> pcs.</div>`;
 
     const events = value;
 
@@ -207,5 +207,10 @@ const renderShowMoreEvents = () => {
 };
 
 export const setCategoryValue = (category) => {
-  document.getElementById("category").value = category;
+  const categorySelect = document.getElementById(SELECT_CATEGORY);
+  categorySelect.value = category;
+  const categoryValue =
+    categorySelect.options[categorySelect.selectedIndex].text;
+  const categoryValueElement = document.getElementById("category-value");
+  categoryValueElement.textContent = categoryValue;
 };

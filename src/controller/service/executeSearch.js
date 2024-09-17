@@ -21,8 +21,7 @@ export const executeSearch = async () => {
 
   searchButton.onclick = (event) => {
     event.preventDefault();
-
-    const firstHint = document.querySelector(HINT_ELEMENT);
+    const firstHint = document.querySelector(`.${HINT_ELEMENT}`);
     const categoryValue = category.options[category.selectedIndex].text;
 
     if (!searchCity.getAttribute(DATA_LOCATION)) {
@@ -49,7 +48,7 @@ export const executeSearch = async () => {
       endDate.value,
       searchCity.getAttribute(DATA_LOCATION),
       category.value,
-      categoryValue
+      categoryValue,
     ];
 
     resultsInit(...params);

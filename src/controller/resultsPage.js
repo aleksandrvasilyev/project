@@ -32,6 +32,9 @@ export const resultsInit = async (
       location
     );
 
+    renderLoading("places", "show");
+    renderLoading("events", "show");
+
     setCategoryValue(category);
 
     const placePromises = getPlaces(location, category);
@@ -43,8 +46,6 @@ export const resultsInit = async (
       endDate
     );
 
-    renderLoading("places", "show");
-    renderLoading("events", "show");
     const [places, events] = await Promise.all([placePromises, eventsPromises]);
 
     await renderPlaces(places);
