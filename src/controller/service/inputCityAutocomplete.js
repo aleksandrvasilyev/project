@@ -1,6 +1,7 @@
 import { API_KEY_FOURSQUARE } from "../../../api-keys.js";
 import {
   API_AUTOCOMPLETE_CITY_URL,
+  DATA_LOCATION,
   HINTS_ELEMENT,
   SEARCH_CITY_ELEMENT,
 } from "../../constants.js";
@@ -23,7 +24,7 @@ export const inputCityAutocomplete = () => {
 
     if (searchCity.value.trim().length === 0) {
       clearHints();
-      searchCity.removeAttribute("data-location");
+      searchCity.removeAttribute(DATA_LOCATION);
       return;
     }
 
@@ -50,7 +51,7 @@ export const inputCityAutocomplete = () => {
     setSearchValue(
       searchCity,
       event.target.innerText,
-      event.target.getAttribute("data-location")
+      event.target.getAttribute(DATA_LOCATION)
     );
     clearHints();
   });

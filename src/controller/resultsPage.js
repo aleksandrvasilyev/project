@@ -1,12 +1,10 @@
-import { SEARCH_CITY_ELEMENT } from "../constants.js";
+import { EVENTS_ELEMENT, HIDE, PLACES_ELEMENT, SEARCH_CITY_ELEMENT } from "../constants.js";
 import { renderError } from "../view/components/renderError.js";
-import { setSearchValue } from "../view/components/renderSearchHints.js";
 import {
   renderResultPage,
   renderPlaces,
   renderEvents,
   renderLoading,
-  setCategoryValue,
 } from "../view/renderResultsPage.js";
 import { executeSearch } from "./service/executeSearch.js";
 import { getEvents } from "./service/getEvents.js";
@@ -25,17 +23,7 @@ export const resultsInit = async (
     const latitude = JSON.parse(location).latitude;
     const longitude = JSON.parse(location).longitude;
 
-    await renderResultPage(city, startDate, endDate, location);
-    setSearchValue(
-      document.getElementById(SEARCH_CITY_ELEMENT),
-      city,
-      location
-    );
-
-    renderLoading("places", "show");
-    renderLoading("events", "show");
-
-    setCategoryValue(category);
+    await renderResultPage(city, startDate, endDate, location, category);
 
     const placePromises = getPlaces(location, category);
 
@@ -49,10 +37,10 @@ export const resultsInit = async (
     const [places, events] = await Promise.all([placePromises, eventsPromises]);
 
     await renderPlaces(places);
-    renderLoading("places", "hide");
+    renderLoading(PLACES_ELEMENT, HIDE);
 
     await renderEvents(events, totalItems);
-    renderLoading("events", "hide");
+    renderLoading(EVENTS_ELEMENT, HIDE);
 
     inputCityAutocomplete();
     executeSearch();

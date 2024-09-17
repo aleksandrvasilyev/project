@@ -1,3 +1,4 @@
+import { HISTORY_LINK } from "../constants.js";
 import { resultsInit } from "../controller/resultsPage.js";
 import { renderTemplate } from "./renderTemplate.js";
 
@@ -12,7 +13,7 @@ export const renderSearchHistory = () => {
    </main>
 `;
   renderTemplate(searchHistoryContent);
-  document.getElementById("history-link").classList.add("active");
+  document.getElementById(HISTORY_LINK).classList.add("active");
 };
 
 export const renderHistoryResults = () => {

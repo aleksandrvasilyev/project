@@ -1,3 +1,4 @@
+import { HOME_LINK } from "../constants.js";
 import { renderTemplate } from "./renderTemplate.js";
 
 export const renderIndex = () => {
@@ -40,5 +41,5 @@ export const renderIndex = () => {
     </main>
 `;
   renderTemplate(indexContent);
-  document.getElementById("home-link").classList.add("active");
+  document.getElementById(HOME_LINK).classList.add("active");
 };

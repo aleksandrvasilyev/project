@@ -23,6 +23,7 @@ export const getPlaces = async (location, category) => {
       ),
       headers
     );
+
     const ids = data.results.map((value) => value.fsq_id);
 
     const placePromises = ids.map(async (id) => {
@@ -31,25 +32,13 @@ export const getPlaces = async (location, category) => {
           API_SINGLE_PLACE_URL.replace("place_id", id),
           headers
         );
-        console.log(dataPlace);
-        const name = dataPlace.name;
-        const description = dataPlace.description;
-        let image;
-        if (dataPlace.photos[0]) {
-          image =
-            dataPlace.photos[0].prefix +
-            "original" +
-            dataPlace.photos[0].suffix;
-        } else {
-          image = "";
-        }
-
-        return [name, description, image];
+        return dataPlace;
       } catch (error) {
         renderError("Error fetch data for ", id, error);
         throw error;
       }
     });
+
     return Promise.all(placePromises);
   } catch (error) {
     renderError("Error in getPlaces: ", error);
