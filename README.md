@@ -37,7 +37,7 @@ To run the project locally:
     export const API_KEY_JAMBASE = "YOUR_API_KEY_JAMBASE";
    ```
 
-3. Open index.html in your browser 
+3. Open index.html in your browser
 
 ## Usage
 
