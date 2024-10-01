@@ -1,9 +1,5 @@
 # Travel Advisor
 
-## Live demo
-
-[https://aleksandrvasilyev.github.io/travel-advisor/](https://aleksandrvasilyev.github.io/travel-advisor/)
-
 ## Overview
 
 Travel Advisor is a web application that allows users to search for attractions and places in a selected city based on specific dates. It helps users plan their trips by offering recommendations for things to do in a city at a particular time.
